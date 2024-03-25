@@ -3,6 +3,7 @@
 // You don't need to read input or print anything. Complete the function minTime() which takes the root of the tree and target as input parameters and returns the minimum time required to burn the complete binary tree if the target is set on fire at the 0th second.
 //{ Driver Code Starts
 //Initial Template for C++
+// https://www.geeksforgeeks.org/problems/burning-tree/1
 
 // see the data structurs used
 class Solution {
