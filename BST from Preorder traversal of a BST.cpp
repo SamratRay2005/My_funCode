@@ -65,3 +65,36 @@ BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
     int i = 0;
     return solve(i,max,min,preorder);
 }
+
+
+//............................................................................................................................................................
+
+
+
+// Alternative method(From Inorder)
+BinaryTreeNode<int>* solve(vector<int> &inorder , vector<int> &preorder , int f , int l, int &i)
+{
+    if (i>=preorder.size())
+    {
+        return NULL;
+    }
+    if (!(inorder[f]<=preorder[i] && inorder[l]>=preorder[i]))
+    {
+        return NULL;
+    }
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(preorder[i++]);
+    int p = lower_bound((inorder.begin()+f) , (inorder.begin() + l) , root->data) - (inorder.begin()+f);
+    p += f;
+    // cout << f << l << " " << i << " " << p << " " << root->data << endl;
+    root->left = solve(inorder,preorder,f,p-1,i);
+    root->right = solve(inorder,preorder,p+1,l,i);
+    return root;
+
+}
+BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
+    vector<int> inorder = preorder;
+    sort(inorder.begin() , inorder.end());
+    int i = 0;
+    int l = preorder.size()-1;
+    return solve(inorder,preorder,0, l, i);
+}
